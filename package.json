@@ -1,7 +1,16 @@
 {
-  "name": "blaze",
-  "module": "src/index.ts",
+  "name": "torchflower",
+  "version": "0.1.0",
+  "description": "A blazingly fast http server built on top of bun's serve function, with easy runtime type checking.",
+  "homepage": "https://github.com/Mark-Marks/torchflower",
+  "author": "Mark Marks <iczerwony98@gmail.com> (https://github.com/Mark-Marks)",
+  "main": "src/index.ts",
+  "license": "MIT",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Mark-Marks/torchflower.git"
+  },
   "devDependencies": {
     "@types/bun": "latest"
   },
