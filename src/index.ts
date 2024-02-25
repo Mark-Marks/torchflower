@@ -1,3 +1,4 @@
+import type { Server, SocketAddress } from "bun"
 import { Router } from "./router"
 
 /**
@@ -51,6 +52,7 @@ export default class Torchflower {
             statusText: "Internal Server Error",
         })
     }
+    private server: Server | undefined = undefined
     public listening: boolean = false
 
     /**
@@ -71,7 +73,7 @@ export default class Torchflower {
     public serve(port: number = 3000, on: () => void) {
         const handle = async (req: Request) => this.router.handle(req)
 
-        Bun.serve({
+        this.server = Bun.serve({
             port: port,
             fetch(req) {
                 return handle(req)
@@ -82,6 +84,15 @@ export default class Torchflower {
         this.listening = true
 
         on()
+    }
+
+    /**
+     * Requests the IP of the client making the request.
+     * @param req Request
+     * @returns IP Address / null
+     */
+    public request_ip(req: Request): SocketAddress | null {
+        return (this.server && this.server.requestIP(req)) || null
     }
 
     /**
